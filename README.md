@@ -66,14 +66,19 @@ This mode segments the object located at a given point.
 roslaunch fastsam_ros fastsam_point.launch
 ```
 
-2. Publish a point prompt:In a new terminal, publish a geometry_msgs/PointStamped message to the /fastsam/point_prompt topic. The x and y values are pixel coordinates.# Example: Prompt with a point at (x=500, y=350)
+2. Publish a point prompt
+```bash
 rostopic pub /fastsam/point_prompt geometry_msgs/PointStamped "header:
-  stamp: now
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs: 0
   frame_id: 'camera_frame'
 point:
-  x: 500.0
-  y: 350.0
-  z: 0.0" -1
+  x: 200.0
+  y: 200.0
+  z: 0.0" --rate 100
+```
 
 ### Launching in "Bounding Box" Mode
 1.
