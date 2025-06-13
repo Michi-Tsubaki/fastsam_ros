@@ -1,0 +1,19 @@
+<launch>
+    <arg name="model_name" default="FastSAM-s.pt" />
+    <arg name="image_topic" default="/camera/image_raw" />
+    <arg name="device" default="cpu" />
+
+    <node name="fastsam_ros" pkg="fastsam_ros" type="fastsam_node.py" output="screen">
+        <!-- Remap the node's internal input topic '~image_in' to the desired global topic -->
+        <remap from="~image_in" to="$(arg image_topic)" />
+        
+        <remap from="~visualization" to="/fastsam/visualization" />
+        <remap from="~segmentation_mask" to="/fastsam/mask" />
+        <remap from="~point_prompt" to="/fastsam/point_prompt" />
+
+        <param name="model_name" value="$(arg model_name)" />
+        <param name="device" value="$(arg device)" />
+        
+        <param name="prompt_mode" value="point" />
+    </node>
+</launch>

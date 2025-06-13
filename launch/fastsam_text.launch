@@ -1,0 +1,18 @@
+<launch>
+    <arg name="model_name" default="FastSAM-s.pt" />
+    <arg name="image_topic" default="/camera/image_raw" />
+    <arg name="device" default="cpu" />
+    
+    <node name="fastsam_ros" pkg="fastsam_ros" type="fastsam_node.py" output="screen">
+        <remap from="~image_in" to="$(arg image_topic)" />
+
+        <remap from="~visualization" to="/fastsam/visualization" />
+        <remap from="~segmentation_mask" to="/fastsam/mask" />
+        
+        <param name="model_name" value="$(arg model_name)" />
+        <param name="device" value="$(arg device)" />
+        
+        <param name="prompt_mode" value="text" />
+        <param name="text_prompt" value="a bus" />
+    </node>
+</launch>
