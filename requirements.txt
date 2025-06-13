@@ -1,0 +1,12 @@
+opencv-python
+numpy
+Pillow
+
+rospkg
+
+ultralytics
+torch
+torchvision
+onnx
+onnxruntime
+onnxsim
